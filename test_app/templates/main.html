@@ -1,0 +1,65 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Interface</title>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.6.2/axios.js" integrity="sha512-yyr/AZnf9KbRjIKQpglQyZeyz2sOJCa0bcAt+qBnY/jfatfojXGz3eymOoZisKcIv9P49K/PzSJwdL5dwOfgGQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.1/vue.js"></script>
+</head>
+<style>
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.description {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+}
+
+.submit-button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.image-input {
+    max-width: 200px;
+    max-height: 200px;
+    margin-bottom: 10px;
+}
+
+.delete-button {
+    background-color: #FF4500;
+    color: white;
+    padding: 8px 12px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+</style>
+
+<body>
+    {% verbatim %}
+    <div class="container" id="ui">
+        <form @submit.prevent="uploadImage" method="post">
+            <label for="fileInput">Выберите файл изображения:</label>
+            <input type="file" ref="fileInput" id="fileInput" style="margin-bottom: 10px"/>
+            <input type="text" v-model="description" placeholder="Описание" class="description" />
+            <button type="submit" class="submit-button">Отправить</button>
+        </form>
+        <br>
+        <div v-for="post in posts" :key="post.id" style="margin-bottom: 20px">
+            <img :src="post.img_code" alt="Image" class="image-input"/>
+            <button @click="deleteImage(post.id)" class="delete-button">Удалить</button>
+        </div>
+    </div>
+    {% endverbatim %}
+<script src="/static/app.js"></script>    
+</body>
+</html>
